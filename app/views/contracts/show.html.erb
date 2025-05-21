@@ -1,0 +1,146 @@
+<div>
+  <div>
+    <h1>
+      Contract #<%= @the_contract.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/contracts">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_contract/<%= @the_contract.id %>">
+          Delete contract
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Contract name
+      </dt>
+      <dd>
+        <%= @the_contract.contract_name %>
+      </dd>
+
+      <dt>
+        Monetary compensation
+      </dt>
+      <dd>
+        <%= @the_contract.monetary_compensation %>
+      </dd>
+
+      <dt>
+        Other compensation
+      </dt>
+      <dd>
+        <%= @the_contract.other_compensation %>
+      </dd>
+
+      <dt>
+        Created by
+      </dt>
+      <dd>
+        <%= @the_contract.created_by %>
+      </dd>
+
+      <dt>
+        Token
+      </dt>
+      <dd>
+        <%= @the_contract.token %>
+      </dd>
+
+      <dt>
+        Tasks count
+      </dt>
+      <dd>
+        <%= @the_contract.tasks_count %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_contract.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_contract.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit contract
+    </h2>
+
+    <form action="/modify_contract/<%= @the_contract.id %>"  method="post" >
+      <div>
+        <label for="contract_name_box">
+          Contract name
+        </label>
+
+        <input type="text" id="contract_name_box" name="query_contract_name" value="<%= @the_contract.contract_name %>">
+      </div>
+
+      <div>
+        <label for="monetary_compensation_box">
+          Monetary compensation
+        </label>
+
+        <input type="text" id="monetary_compensation_box" name="query_monetary_compensation" value="<%= @the_contract.monetary_compensation %>">
+      </div>
+
+      <div>
+        <label for="other_compensation_box">
+          Other compensation
+        </label>
+
+        <input type="text" id="other_compensation_box" name="query_other_compensation" value="<%= @the_contract.other_compensation %>">
+      </div>
+
+      <div>
+        <label for="created_by_box">
+          Created by
+        </label>
+
+        <input type="text" id="created_by_box" name="query_created_by" value="<%= @the_contract.created_by %>">
+      </div>
+
+      <div>
+        <label for="token_box">
+          Token
+        </label>
+
+        <input type="text" id="token_box" name="query_token" value="<%= @the_contract.token %>">
+      </div>
+
+      <div>
+        <label for="tasks_count_box">
+          Tasks count
+        </label>
+
+        <input type="text" id="tasks_count_box" name="query_tasks_count" value="<%= @the_contract.tasks_count %>">
+      </div>
+
+      <button>
+        Update contract
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

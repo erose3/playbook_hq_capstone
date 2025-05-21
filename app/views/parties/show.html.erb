@@ -1,0 +1,86 @@
+<div>
+  <div>
+    <h1>
+      Party #<%= @the_party.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/parties">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_party/<%= @the_party.id %>">
+          Delete party
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Contract
+      </dt>
+      <dd>
+        <%= @the_party.contract_id %>
+      </dd>
+
+      <dt>
+        Party
+      </dt>
+      <dd>
+        <%= @the_party.party_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_party.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_party.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit party
+    </h2>
+
+    <form action="/modify_party/<%= @the_party.id %>"  method="post" >
+      <div>
+        <label for="contract_id_box">
+          Contract
+        </label>
+
+        <input type="text" id="contract_id_box" name="query_contract_id" value="<%= @the_party.contract_id %>">
+      </div>
+
+      <div>
+        <label for="party_id_box">
+          Party
+        </label>
+
+        <input type="text" id="party_id_box" name="query_party_id" value="<%= @the_party.party_id %>">
+      </div>
+
+      <button>
+        Update party
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

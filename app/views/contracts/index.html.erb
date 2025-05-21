@@ -1,0 +1,166 @@
+<div>
+  <div>
+    <h1>
+      List of all contracts
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new contract
+    </h2>
+
+    <form action="/insert_contract" method="post">
+      <div>
+        <label for="contract_name_box">
+          Contract name
+        </label>
+
+        <input type="text" id="contract_name_box" name="query_contract_name">
+      </div>
+
+      <div>
+        <label for="monetary_compensation_box">
+          Monetary compensation
+        </label>
+
+        <input type="text" id="monetary_compensation_box" name="query_monetary_compensation">
+      </div>
+
+      <div>
+        <label for="other_compensation_box">
+          Other compensation
+        </label>
+
+        <input type="text" id="other_compensation_box" name="query_other_compensation">
+      </div>
+
+      <div>
+        <label for="created_by_box">
+          Created by
+        </label>
+
+        <input type="text" id="created_by_box" name="query_created_by">
+      </div>
+
+      <div>
+        <label for="token_box">
+          Token
+        </label>
+
+        <input type="text" id="token_box" name="query_token">
+      </div>
+
+      <div>
+        <label for="tasks_count_box">
+          Tasks count
+        </label>
+
+        <input type="text" id="tasks_count_box" name="query_tasks_count">
+      </div>
+
+      <button>
+        Create contract
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Contract name
+        </th>
+
+        <th>
+          Monetary compensation
+        </th>
+
+        <th>
+          Other compensation
+        </th>
+
+        <th>
+          Created by
+        </th>
+
+        <th>
+          Token
+        </th>
+
+        <th>
+          Tasks count
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_contracts.each do |a_contract| %>
+      <tr>
+        <td>
+          <%= a_contract.id %>
+        </td>
+
+        <td>
+          <%= a_contract.contract_name %>
+        </td>
+
+        <td>
+          <%= a_contract.monetary_compensation %>
+        </td>
+
+        <td>
+          <%= a_contract.other_compensation %>
+        </td>
+
+        <td>
+          <%= a_contract.created_by %>
+        </td>
+
+        <td>
+          <%= a_contract.token %>
+        </td>
+
+        <td>
+          <%= a_contract.tasks_count %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_contract.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_contract.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/contracts/<%= a_contract.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

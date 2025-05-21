@@ -1,0 +1,102 @@
+<div>
+  <div>
+    <h1>
+      List of all parties
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new party
+    </h2>
+
+    <form action="/insert_party" method="post">
+      <div>
+        <label for="contract_id_box">
+          Contract
+        </label>
+
+        <input type="text" id="contract_id_box" name="query_contract_id">
+      </div>
+
+      <div>
+        <label for="party_id_box">
+          Party
+        </label>
+
+        <input type="text" id="party_id_box" name="query_party_id">
+      </div>
+
+      <button>
+        Create party
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Contract
+        </th>
+
+        <th>
+          Party
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_parties.each do |a_party| %>
+      <tr>
+        <td>
+          <%= a_party.id %>
+        </td>
+
+        <td>
+          <%= a_party.contract_id %>
+        </td>
+
+        <td>
+          <%= a_party.party_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_party.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_party.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/parties/<%= a_party.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

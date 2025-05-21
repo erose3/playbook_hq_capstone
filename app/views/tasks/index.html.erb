@@ -1,0 +1,196 @@
+<div>
+  <div>
+    <h1>
+      List of all tasks
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new task
+    </h2>
+
+    <form action="/insert_task" method="post">
+      <div>
+        <label for="contract_id_box">
+          Contract
+        </label>
+
+        <input type="text" id="contract_id_box" name="query_contract_id">
+      </div>
+
+      <div>
+        <label for="task_name_box">
+          Task name
+        </label>
+
+        <input type="text" id="task_name_box" name="query_task_name">
+      </div>
+
+      <div>
+        <label for="description_box">
+          Description
+        </label>
+
+        <textarea id="description_box" name="query_description" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="created_by_box">
+          Created by
+        </label>
+
+        <input type="text" id="created_by_box" name="query_created_by">
+      </div>
+
+      <div>
+        <label for="deadline_box">
+          Deadline
+        </label>
+
+        <input type="date" id="deadline_box" name="query_deadline">
+      </div>
+
+      <div>
+        <input type="checkbox" id="completion_status_box" name="query_completion_status" value="1">
+
+        <label for="completion_status_box">Completion status</label>
+      </div>
+
+      <div>
+        <label for="completed_on_box">
+          Completed on
+        </label>
+
+        <input type="date" id="completed_on_box" name="query_completed_on">
+      </div>
+
+      <div>
+        <label for="assigned_to_box">
+          Assigned to
+        </label>
+
+        <input type="text" id="assigned_to_box" name="query_assigned_to">
+      </div>
+
+      <button>
+        Create task
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Contract
+        </th>
+
+        <th>
+          Task name
+        </th>
+
+        <th>
+          Description
+        </th>
+
+        <th>
+          Created by
+        </th>
+
+        <th>
+          Deadline
+        </th>
+
+        <th>
+          Completion status
+        </th>
+
+        <th>
+          Completed on
+        </th>
+
+        <th>
+          Assigned to
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_tasks.each do |a_task| %>
+      <tr>
+        <td>
+          <%= a_task.id %>
+        </td>
+
+        <td>
+          <%= a_task.contract_id %>
+        </td>
+
+        <td>
+          <%= a_task.task_name %>
+        </td>
+
+        <td>
+          <%= a_task.description %>
+        </td>
+
+        <td>
+          <%= a_task.created_by %>
+        </td>
+
+        <td>
+          <%= a_task.deadline %>
+        </td>
+
+        <td>
+          <%= a_task.completion_status %>
+        </td>
+
+        <td>
+          <%= a_task.completed_on %>
+        </td>
+
+        <td>
+          <%= a_task.assigned_to %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_task.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_task.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/tasks/<%= a_task.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
