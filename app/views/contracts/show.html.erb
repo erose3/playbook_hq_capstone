@@ -8,13 +8,19 @@
     <div>
       <div>
         <a href="/contracts">
-          Go back
+          Go Back
+        </a>
+      </div>
+
+      <div>
+        <a href="/edit_contract/<%= @the_contract.id %>">
+          Edit Contract
         </a>
       </div>
 
       <div>
         <a href="/delete_contract/<%= @the_contract.id %>">
-          Delete contract
+          Delete Contract
         </a>
       </div>
     </div>
@@ -27,6 +33,10 @@
         <%#= @the_contract.contract_name %>-->
 <!--      </dd>
 -->
+      <dt>
+        Contract Description: <%= @the_contract.description %>
+      </dt>
+
       <dt>
         Monetary compensation: <%= @the_contract.monetary_compensation %>
       </dt>
@@ -56,11 +66,11 @@
 <!--      </dd>-->
 
       <dt>
-        Created: <%= @the_contract.created_at %>
+        Created: <%= @the_contract.created_at.strftime("%b %e, %Y") %>
       </dt>
 
       <dt>
-        Updated: <%= @the_contract.updated_at %>
+        Updated: <%= @the_contract.updated_at.strftime("%b %e, %Y") %>
       </dt>
       
     </dl>
@@ -69,20 +79,26 @@
 
 <hr>
 
-
-<div>
+<!--<div>
   <div>
     <h2>
       Edit contract
     </h2>
 
-    <form action="/modify_contract/<%= @the_contract.id %>"  method="post" >
+    <form action="/modify_contract/<%#= @the_contract.id %>"  method="post" >
       <div>
         <label for="contract_name_box">
           Contract name
         </label>
 
-        <input type="text" id="contract_name_box" name="query_contract_name" value="<%= @the_contract.contract_name %>">
+        <input type="text" id="contract_name_box" name="query_contract_name" value="<%#= @the_contract.contract_name %>">
+      </div>
+
+      <label for="contract_description_box">
+          Brief Description
+        </label>
+
+        <input type="text" id="contract_description_box" name="query_description" value="<%#= @the_contract.description %>">
       </div>
 
       <div>
@@ -90,7 +106,7 @@
           Monetary compensation
         </label>
 
-        <input type="text" id="monetary_compensation_box" name="query_monetary_compensation" value="<%= @the_contract.monetary_compensation %>">
+        <input type="text" id="monetary_compensation_box" name="query_monetary_compensation" value="<%#= @the_contract.monetary_compensation %>">
       </div>
 
       <div>
@@ -98,36 +114,118 @@
           Other compensation
         </label>
 
-        <input type="text" id="other_compensation_box" name="query_other_compensation" value="<%= @the_contract.other_compensation %>">
+        <input type="text" id="other_compensation_box" name="query_other_compensation" value="<%#= @the_contract.other_compensation %>">
       </div>
 
       <div>
         <label for="created_by_box">
         </label>
 
-        <input type="hidden" id="created_by_box" name="query_created_by" value="<%= @the_contract.created_by %>">
+        <input type="hidden" id="created_by_box" name="query_created_by" value="<%#= @the_contract.created_by %>">
       </div>
 
       <div>
         <label for="token_box">
         </label>
 
-        <input type="hidden" id="token_box" name="query_token" value="<%= @the_contract.token %>">
+        <input type="hidden" id="token_box" name="query_token" value="<%#= @the_contract.token %>">
       </div>
 
-      <!--<div>
+      <div>
         <label for="tasks_count_box">
           Tasks count
         </label>
 
-        <input type="text" id="tasks_count_box" name="query_tasks_count" value="<%#= @the_contract.tasks_count %>">
-      </div>-->
+        <input type="text" id="tasks_count_box" name="query_tasks_count" value="<%##= @the_contract.tasks_count %>">
+      </div>
 
       <button>
         Update contract
       </button>
     </form>
   </div>
+</div>-->
+
+<div>
+  <div>
+    <h2>
+      Add a new task
+    </h2>
+
+    <form action="/insert_task" method="post">
+      <div>
+        <input type="hidden" id="contract_id_box" name="query_contract_id" value="<%= @the_contract.id %>">
+      </div>
+
+      <div>
+        <label for="task_name_box">
+          Task name
+        </label>
+
+        <input type="text" id="task_name_box" name="query_task_name">
+      </div>
+
+      <div>
+        <label for="description_box">
+          Description
+        </label>
+
+        <textarea id="description_box" name="query_description" rows="3"></textarea>
+      </div>
+
+      <div>
+        <input type="hidden" id="created_by_box" name="query_created_by">
+      </div>
+
+      <div>
+        <label for="deadline_box">
+          Deadline
+        </label>
+
+        <input type="date" id="deadline_box" name="query_deadline">
+      </div>
+
+      <div>
+        <input type="hidden" id="completion_status_box" name="query_completion_status" value="1">
+      </div>
+
+      <div>
+        <input type="hidden" id="completed_on_box" name="query_completed_on">
+      </div>
+
+      <div>
+        <label for="assigned_to_box">
+          Assigned to
+        </label>
+
+        <input type="text" id="assigned_to_box" name="query_assigned_to">
+      </div>
+
+      <button>
+        Create task
+      </button>
+    </form>
+  </div>
 </div>
 
-<hr>
+<h2>Contract Tasks</h2>
+
+<table border="1">
+  <tr>
+    <th>Task</th>
+    <th>Description</th>
+    <th>Assigned To</th>
+    <th>Deadline</th>
+    <th>Status</th>
+  </tr>
+
+  <% @matching_tasks.each do |a_task| %>
+    <tr>
+      <td><%= a_task.task_name %></td>
+      <td><%= a_task.description %></td>
+      <td><%= a_task.assigned_to %></td>
+      <td><%= a_task.deadline.strftime("%b %e, %Y") %></td>
+      <td><%= a_task.completion_status %></td>
+    </tr>
+  <% end %>
+</table>

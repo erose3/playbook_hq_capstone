@@ -52,10 +52,13 @@ Rails.application.routes.draw do
   get("/new_contract", { :controller => "contracts", :action => "new_contract_form" })
   
   get("/contracts/:path_id", { :controller => "contracts", :action => "show" })
+
+  get("/edit_contract/:path_id", { :controller => "contracts", :action => "edit_contract_form" })
   
   # UPDATE
   
   post("/modify_contract/:path_id", { :controller => "contracts", :action => "update" })
+  
   
   # DELETE
   get("/delete_contract/:path_id", { :controller => "contracts", :action => "destroy" })

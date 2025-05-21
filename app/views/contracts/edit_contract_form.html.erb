@@ -1,0 +1,72 @@
+<div>
+  <div>
+    <h2>
+      Edit contract
+    </h2>
+
+    <% the_id = params.fetch("path_id") %>
+
+    <% matching_contracts = Contract.where({ :id => the_id }) %>
+
+    <% @the_contract = matching_contracts.at(0) %>
+
+    <form action="/modify_contract/<%= @the_contract.id %>"  method="post" >
+      <div>
+        <label for="contract_name_box">
+          Contract name
+        </label>
+
+        <input type="text" id="contract_name_box" name="query_contract_name" value="<%= @the_contract.contract_name %>">
+      </div>
+
+      <label for="contract_description_box">
+          Brief Description
+        </label>
+
+        <input type="text" id="contract_description_box" name="query_description" value="<%= @the_contract.description %>">
+      </div>
+
+      <div>
+        <label for="monetary_compensation_box">
+          Monetary compensation
+        </label>
+
+        <input type="text" id="monetary_compensation_box" name="query_monetary_compensation" value="<%= @the_contract.monetary_compensation %>">
+      </div>
+
+      <div>
+        <label for="other_compensation_box">
+          Other compensation
+        </label>
+
+        <input type="text" id="other_compensation_box" name="query_other_compensation" value="<%= @the_contract.other_compensation %>">
+      </div>
+
+      <div>
+        <label for="created_by_box">
+        </label>
+
+        <input type="hidden" id="created_by_box" name="query_created_by" value="<%= @the_contract.created_by %>">
+      </div>
+
+      <div>
+        <label for="token_box">
+        </label>
+
+        <input type="hidden" id="token_box" name="query_token" value="<%= @the_contract.token %>">
+      </div>
+
+      <!--<div>
+        <label for="tasks_count_box">
+          Tasks count
+        </label>
+
+        <input type="text" id="tasks_count_box" name="query_tasks_count" value="<%#= @the_contract.tasks_count %>">
+      </div>-->
+
+      <button>
+        Update contract
+      </button>
+    </form>
+  </div>
+</div>

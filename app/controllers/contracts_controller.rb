@@ -14,6 +14,8 @@ class ContractsController < ApplicationController
 
     @the_contract = matching_contracts.at(0)
 
+    @matching_tasks = Task.where({ :contract_id => @the_contract.id })
+
     render({ :template => "contracts/show" })
   end
 
@@ -37,8 +39,8 @@ class ContractsController < ApplicationController
   def update
     the_id = params.fetch("path_id")
     the_contract = Contract.where({ :id => the_id }).at(0)
-
     the_contract.contract_name = params.fetch("query_contract_name")
+    the_contract.description = params.fetch("query_description")
     the_contract.monetary_compensation = params.fetch("query_monetary_compensation")
     the_contract.other_compensation = params.fetch("query_other_compensation")
     # the_contract.created_by = params.fetch("query_created_by")
