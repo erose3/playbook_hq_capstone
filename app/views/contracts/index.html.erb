@@ -139,7 +139,7 @@
         <td>
           <% matching_users = User.where ({ id: a_contract.created_by }) %>
           <% the_user = matching_users.at(0) %>
-          <%= the_user.email %>
+          <%= the_user.first_name %> <%= the_user.last_name %>
         </td>
 
     <!--    <td>-->

@@ -41,9 +41,8 @@ class ContractsController < ApplicationController
     the_contract.contract_name = params.fetch("query_contract_name")
     the_contract.monetary_compensation = params.fetch("query_monetary_compensation")
     the_contract.other_compensation = params.fetch("query_other_compensation")
-    the_contract.created_by = params.fetch("query_created_by")
-    the_contract.token = params.fetch("query_token")
-    the_contract.tasks_count = params.fetch("query_tasks_count")
+    # the_contract.created_by = params.fetch("query_created_by")
+    # the_contract.token = params.fetch("query_token")
 
     if the_contract.valid?
       the_contract.save
