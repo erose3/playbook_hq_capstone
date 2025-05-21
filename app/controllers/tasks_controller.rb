@@ -24,7 +24,7 @@ class TasksController < ApplicationController
     the_task.description = params.fetch("query_description")
     the_task.created_by = current_user.id
     the_task.deadline = params.fetch("query_deadline")
-    the_task.completion_status = params.fetch("query_completion_status", false)
+    the_task.completion_status = "false"
     the_task.completed_on = params.fetch("query_completed_on")
     the_task.assigned_to = params.fetch("query_assigned_to")
 
