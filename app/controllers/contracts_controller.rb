@@ -14,7 +14,7 @@ class ContractsController < ApplicationController
 
     @the_contract = matching_contracts.at(0)
 
-    @matching_tasks = Task.where({ :contract_id => @the_contract.id })
+    @matching_tasks = Task.where({ :contract_id => @the_contract.id }).order({ :deadline => :asc })
 
     render({ :template => "contracts/show" })
   end

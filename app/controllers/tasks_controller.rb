@@ -30,9 +30,9 @@ class TasksController < ApplicationController
 
     if the_task.valid?
       the_task.save
-      redirect_to("/tasks", { :notice => "Task created successfully." })
+      redirect_to("/contracts/#{the_task.contract_id}", { :notice => "Task created successfully." })
     else
-      redirect_to("/tasks", { :alert => the_task.errors.full_messages.to_sentence })
+      redirect_to("/contracts/#{the_task.contract_id}", { :alert => the_task.errors.full_messages.to_sentence })
     end
   end
 
