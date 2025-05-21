@@ -14,7 +14,6 @@ class ApplicationController < ActionController::Base
          :last_name,
          :account_type,
          :organization,
-         :avatar_url
        ]
      )
      devise_parameter_sanitizer.permit(
@@ -25,7 +24,6 @@ class ApplicationController < ActionController::Base
          :last_name,
          :account_type,
          :organization,
-         :avatar_url
        ]
      )
    end
