@@ -73,33 +73,33 @@
   <div>
     <table border="1">
       <tr>
-        <th>
+       <!-- <th>
           ID
-        </th>
+        </th>-->
 
         <th>
           Contract name
         </th>
 
         <th>
-          Monetary compensation
+          Compenstation ($)
         </th>
 
         <th>
-          Other compensation
+          Compenstation (Other)
         </th>
 
         <th>
           Created by
         </th>
 
-        <th>
+        <!--<th>
           Token
         </th>
 
         <th>
           Tasks count
-        </th>
+        </th>-->
 
         <th>
           Created at
@@ -115,9 +115,9 @@
 
       <% @list_of_contracts.each do |a_contract| %>
       <tr>
-        <td>
-          <%= a_contract.id %>
-        </td>
+        <!--<td>-->
+          <%#= a_contract.id %>
+<!--        </td>-->
 
         <td>
           <%= a_contract.contract_name %>
@@ -137,13 +137,13 @@
           <%= the_user.email %>
         </td>
 
-        <td>
-          <%= a_contract.token %>
-        </td>
+    <!--    <td>-->
+          <%#= a_contract.token %>
+<!--        </td>-->
 
-        <td>
-          <%= a_contract.tasks_count %>
-        </td>
+       <!-- <td>-->
+          <%#= a_contract.tasks_count %>
+<!--        </td>-->
 
         <td>
           <%= time_ago_in_words(a_contract.created_at) %> ago
