@@ -57,6 +57,21 @@ class TasksController < ApplicationController
     end
   end
 
+  def toggle_status
+     the_id = params.fetch("path_id")
+     matching_tasks = Task.where({ :id => the_id })
+     the_task = matching_tasks.at(0)
+
+     # params["completion_status"] will be "true" if checked, nil if not
+     new_status = params.fetch("completion_status", nil) == "true"
+     the_task.completion_status = new_status
+     the_task.save
+
+     # send them back to whatever page they came from;
+     # here I’m assuming the contract show page
+     redirect_to("/contracts/" + the_task.contract_id.to_s)
+   end
+
   def destroy
     the_id = params.fetch("path_id")
     the_task = Task.where({ :id => the_id }).at(0)

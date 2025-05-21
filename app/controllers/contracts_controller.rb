@@ -16,6 +16,9 @@ class ContractsController < ApplicationController
 
     @matching_tasks = Task.where({ :contract_id => @the_contract.id }).order({ :deadline => :asc })
 
+    @completed_tasks = @matching_tasks.where({ :completion_status => "true"}).order({ :deadline => :asc })
+    @pending_tasks = @matching_tasks.where({ :completion_status => "false"}).order({ :deadline => :asc })
+
     render({ :template => "contracts/show" })
   end
 

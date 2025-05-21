@@ -208,24 +208,66 @@
   </div>
 </div>
 
-<h2>Contract Tasks</h2>
+<h2>Pending Tasks</h2>
 
 <table border="1">
-  <tr>
-    <th>Task</th>
-    <th>Description</th>
-    <th>Assigned To</th>
-    <th>Deadline</th>
-    <th>Completed?</th>
-  </tr>
+   <tr>
+     <th>Task</th>
+     <th>Description</th>
+     <th>Assigned To</th>
+     <th>Deadline</th>
+     <th>Status</th>
+   </tr>
 
-  <% @matching_tasks.each do |a_task| %>
-    <tr>
-      <td><%= a_task.task_name %></td>
-      <td><%= a_task.description %></td>
-      <td><%= a_task.assigned_to %></td>
-      <td><%= a_task.deadline.strftime("%b %e, %Y") %></td>
-      <td><%= a_task.completion_status %></td>
-    </tr>
-  <% end %>
-</table>
+   <% @pending_tasks.each do |a_task| %>
+     <tr>
+       <td><%= a_task.task_name %></td>
+       <td><%= a_task.description %></td>
+       <td><%= a_task.assigned_to %></td>
+       <td><%= a_task.deadline.strftime("%b %e, %Y") %></td>
+       <td>
+         <form action="/toggle_task_status/<%= a_task.id %>" method="post">
+           <input
+             type="checkbox"
+             name="completion_status"
+             value="true"
+             <% if a_task.completion_status %>checked<% end %>
+             onchange="this.form.submit();"
+           >
+         </form>
+       </td>
+     </tr>
+   <% end %>
+ </table>
+
+<h2>Completed Tasks</h2>
+
+<table border="1">
+   <tr>
+     <th>Task</th>
+     <th>Description</th>
+     <th>Assigned To</th>
+     <th>Deadline</th>
+     <th>Status</th>
+   </tr>
+
+   <% @completed_tasks.each do |a_task| %>
+     <tr>
+       <td><%= a_task.task_name %></td>
+       <td><%= a_task.description %></td>
+       <td><%= a_task.assigned_to %></td>
+       <td><%= a_task.deadline.strftime("%b %e, %Y") %></td>
+       <td>
+         <form action="/toggle_task_status/<%= a_task.id %>" method="post">
+           <input
+             type="checkbox"
+             name="completion_status"
+             value="true"
+             <% if a_task.completion_status %>checked<% end %>
+             onchange="this.form.submit();"
+           >
+         </form>
+       </td>
+     </tr>
+   <% end %>
+ </table>

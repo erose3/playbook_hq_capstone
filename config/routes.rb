@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   # UPDATE
   
   post("/modify_task/:path_id", { :controller => "tasks", :action => "update" })
+  post("/toggle_task_status/:path_id", { :controller => "tasks", :action => "toggle_status" })
   
   # DELETE
   get("/delete_task/:path_id", { :controller => "tasks", :action => "destroy" })
