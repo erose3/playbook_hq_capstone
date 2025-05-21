@@ -48,6 +48,8 @@ Rails.application.routes.draw do
           
   # READ
   get("/contracts", { :controller => "contracts", :action => "index" })
+
+  get("/new_contract", { :controller => "contracts", :action => "new_contract_form" })
   
   get("/contracts/:path_id", { :controller => "contracts", :action => "show" })
   
