@@ -1,18 +1,47 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Rails Template</title>
+    <title>Playbook HQ</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
   </head>
 
   <body>
+    <nav>
+      <h1>Playbook HQ</h1>
+      <hr>
+      <a href="/">My Contracts</a>
+      <a href="/tasks">My Tasks</a>
+
+      <% if current_user != nil %>
+        <a href="/users/sign_out">Sign out</a>
+        <a href="/users/edit">Edit profile</a>
+      <% else %>
+        <a href="/users/sign_up">Sign up</a>
+        <a href="/users/sign_in">Sign in</a>
+      <% end %>
+
+
+    </nav>
+
+    <hr>
+
+    <% if notice.present? %>
+      <div style="color: green">
+        <%= notice %>
+      </div>
+    <% end %>
+
+    <% if alert.present? %>
+      <div style="color: red">
+        <%= alert %>
+      </div>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

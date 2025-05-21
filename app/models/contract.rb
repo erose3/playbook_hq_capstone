@@ -5,6 +5,7 @@
 #  id                    :bigint           not null, primary key
 #  contract_name         :string
 #  created_by            :integer
+#  description           :text
 #  monetary_compensation :integer
 #  other_compensation    :string
 #  tasks_count           :integer

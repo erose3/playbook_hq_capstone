@@ -24,6 +24,14 @@
       </div>
 
       <div>
+        <label for="description_box">
+          Brief Description
+        </label>
+
+        <textarea type="text" id="description_box" name="query_description"></textarea>
+      </div>
+
+      <div>
         <label for="monetary_compensation_box">
           Monetary compensation
         </label>
@@ -41,10 +49,8 @@
 
       <div>
         <label for="created_by_box">
-          Created by
         </label>
-
-        <input type="text" id="created_by_box" name="query_created_by">
+        <input type="hidden" id="created_by_box" name="query_created_by">
       </div>
 
       <div>
@@ -53,14 +59,6 @@
         </label>
 
         <input type="text" id="token_box" name="query_token">
-      </div>
-
-      <div>
-        <label for="tasks_count_box">
-          Tasks count
-        </label>
-
-        <input type="text" id="tasks_count_box" name="query_tasks_count">
       </div>
 
       <button>
@@ -134,7 +132,9 @@
         </td>
 
         <td>
-          <%= a_contract.created_by %>
+          <% matching_users = User.where ({ id: a_contract.created_by }) %>
+          <% the_user = matching_users.at(0) %>
+          <%= the_user.email %>
         </td>
 
         <td>
@@ -154,7 +154,7 @@
 
         <td>
           <a href="/contracts/<%= a_contract.id %>">
-            Show details
+            Show Contract Details
           </a>
         </td>
       </tr>
