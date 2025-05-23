@@ -59,7 +59,7 @@ Rails.application.routes.draw do
   # UPDATE
   
   post("/modify_contract/:path_id", { :controller => "contracts", :action => "update" })
-  
+  post("/modify_contract_status/:path_id", { :controller => "contracts", :action => "update_status" })
   
   # DELETE
   get("/delete_contract/:path_id", { :controller => "contracts", :action => "destroy" })

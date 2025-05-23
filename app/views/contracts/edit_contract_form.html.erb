@@ -10,6 +10,10 @@
 
     <% @the_contract = matching_contracts.at(0) %>
 
+    <a href="/contracts/<%= @the_contract.id %>">Go back</a>
+
+    <hr>
+
     <form action="/modify_contract/<%= @the_contract.id %>"  method="post" >
       <div>
         <label for="contract_name_box">
@@ -28,10 +32,10 @@
 
       <div>
         <label for="monetary_compensation_box">
-          Monetary compensation
+          Monetary compensation $
         </label>
 
-        <input type="text" id="monetary_compensation_box" name="query_monetary_compensation" value="<%= @the_contract.monetary_compensation %>">
+        <input type="number" id="monetary_compensation_box" name="query_monetary_compensation" value="<%= @the_contract.monetary_compensation %>">
       </div>
 
       <div>
@@ -54,6 +58,11 @@
         </label>
 
         <input type="hidden" id="token_box" name="query_token" value="<%= @the_contract.token %>">
+      </div>
+
+      <div>
+
+        <input type="hidden" id="status_box" name="query_status" value="<%= @the_contract.status %>">
       </div>
 
       <!--<div>

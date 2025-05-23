@@ -8,6 +8,7 @@
 #  description           :text
 #  monetary_compensation :integer
 #  other_compensation    :string
+#  status                :string
 #  tasks_count           :integer
 #  token                 :string
 #  created_at            :datetime         not null

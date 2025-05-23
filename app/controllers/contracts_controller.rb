@@ -2,7 +2,13 @@ class ContractsController < ApplicationController
   def index
     matching_contracts = Contract.all
 
-    @list_of_contracts = matching_contracts.order({ :created_at => :desc })
+    if current_user != nil
+      @list_of_contracts = matching_contracts.order({ :created_at => :desc })
+      @user_contracts = @list_of_contracts.where({ :created_by => current_user.id })
+    else
+      @list_of_contracts = matching_contracts.order({ :created_at => :desc })
+    end
+
 
     render({ :template => "contracts/index" })
   end
@@ -30,6 +36,7 @@ class ContractsController < ApplicationController
     the_contract.other_compensation = params.fetch("query_other_compensation")
     the_contract.created_by = current_user.id
     the_contract.token = params.fetch("query_token")
+    the_contract.status = "Pending"
 
     if the_contract.valid?
       the_contract.save
@@ -46,6 +53,7 @@ class ContractsController < ApplicationController
     the_contract.description = params.fetch("query_description")
     the_contract.monetary_compensation = params.fetch("query_monetary_compensation")
     the_contract.other_compensation = params.fetch("query_other_compensation")
+    the_contract.status = params.fetch("query_status")
     # the_contract.created_by = params.fetch("query_created_by")
     # the_contract.token = params.fetch("query_token")
 
@@ -55,6 +63,15 @@ class ContractsController < ApplicationController
     else
       redirect_to("/contracts/#{the_contract.id}", { :alert => the_contract.errors.full_messages.to_sentence })
     end
+  end
+
+  def update_status
+    the_id = params.fetch("path_id")
+    the_contract = Contract.where({ :id => the_id }).at(0)
+    the_contract.status = params.fetch("query_status")
+    the_contract.save
+
+    redirect_to("/contracts/#{ the_contract.id }")
   end
 
   def destroy

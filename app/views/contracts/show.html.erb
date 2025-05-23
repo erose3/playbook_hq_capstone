@@ -25,6 +25,35 @@
       </div>
     </div>
 
+<br>
+
+    <div>
+  <form
+    action="/modify_contract_status/<%= @the_contract.id %>"
+    method="post"
+  >
+    <label for="status_box">
+      Contract Status
+    </label>
+
+    <select
+      id="status_box"
+      name="query_status"
+      onchange="this.form.submit()"
+    >
+      <% ["Pending", "Active", "Complete", "Cancelled"].each do |st| %>
+        <option
+          value="<%= st %>"
+          <%= "selected" if @the_contract.status == st %>
+        >
+          <%= st %>
+        </option>
+      <% end %>
+    </select>
+  </form>
+</div>
+
+
     <dl>
       <!--<dt>
         Contract name
@@ -38,7 +67,7 @@
       </dt>
 
       <dt>
-        Monetary compensation: <%= @the_contract.monetary_compensation %>
+        Monetary compensation: <%= "$%.2f" % @the_contract.monetary_compensation %>
       </dt>
 
       <dt>

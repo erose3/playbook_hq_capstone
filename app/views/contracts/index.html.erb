@@ -5,8 +5,11 @@
     </h1>
   </div>
 
+<% if current_user != nil %>
 <button><a href="/new_contract">Add New Contract</a></button>
-
+<% else %>
+<h2>Please <a href="/users/sign_in">log in</a> or <a href="/users/sign_up">sign up</a> to view and add contracts.</h2>
+<% end %>
 
 <!--</div>
 
@@ -74,6 +77,8 @@
 <br>
 <br>
 
+<% if current_user != nil %>
+
 <div>
   <div>
     <table border="1">
@@ -88,6 +93,10 @@
 
         <th>
           Description
+        </th>
+
+        <th>
+          Status
         </th>
 
         <th>
@@ -118,18 +127,18 @@
           Updated at
         </th>
 
-        <th>
-        </th>
       </tr>
-
-      <% @list_of_contracts.each do |a_contract| %>
+        
+      <% @user_contracts.each do |a_contract| %>
       <tr>
         <!--<td>-->
           <%#= a_contract.id %>
 <!--        </td>-->
 
         <td>
+        <a href="/contracts/<%= a_contract.id %>">
           <%= a_contract.contract_name %>
+        </a>
         </td>
 
         <td>
@@ -137,7 +146,11 @@
         </td>
 
         <td>
-          <%= a_contract.monetary_compensation %>
+          <%= a_contract.status %>
+        </td>
+
+        <td>
+          <%= "$%.2f" % a_contract.monetary_compensation %>
         </td>
 
         <td>
@@ -165,15 +178,16 @@
           <%= a_contract.updated_at.strftime("%b %e, %Y") %>
         </td>
 
-        <td>
-          <a href="/contracts/<%= a_contract.id %>">
+        <!--<td>
+          <a href="/contracts/<%#= a_contract.id %>">
             Show Contract Details
           </a>
-        </td>
+        </td>-->
       </tr>
       <% end %>
     </table>
   </div>
 </div>
 
-<hr>
+<% else %>
+<% end %>

@@ -1,16 +1,17 @@
 <div>
   <div>
     <h1>
-      List of all tasks
+      Your Tasks
     </h1>
   </div>
 </div>
 
 <hr>
 
+<% if current_user != nil %>
 <div>
   <div>
-    <h2>
+    <!--<h2>
       Add a new task
     </h2>
 
@@ -83,15 +84,15 @@
     </form>
   </div>
 </div>
+-->
 
-<hr>
 <div>
   <div>
     <table border="1">
       <tr>
-        <th>
+        <!--<th>
           ID
-        </th>
+        </th>-->
 
         <th>
           Contract
@@ -137,14 +138,16 @@
         </th>
       </tr>
 
-      <% @list_of_tasks.each do |a_task| %>
+      <% @user_tasks.each do |a_task| %>
       <tr>
-        <td>
-          <%= a_task.id %>
-        </td>
+        <!--<td>-->
+          <%#= a_task.id %>
+<!--        </td>-->
 
         <td>
-          <%= a_task.contract_id %>
+          <% matching_contracts = Contract.where ({ id: a_task.contract_id }) %>
+          <% the_contract = matching_contracts.at(0) %>
+          <a href="/contracts/<%= the_contract.id %>"><%= the_contract.contract_name %></a>
         </td>
 
         <td>
@@ -156,7 +159,9 @@
         </td>
 
         <td>
-          <%= a_task.created_by %>
+          <% matching_users = User.where ({ id: a_task.created_by }) %>
+          <% the_user = matching_users.at(0) %>
+          <%= the_user.first_name %> <%= the_user.last_name %>
         </td>
 
         <td>
@@ -193,4 +198,6 @@
   </div>
 </div>
 
-<hr>
+<% else %>
+<h2>Please <a href="/users/sign_in">log in</a> or <a href="/users/sign_up">sign up</a> to view and add tasks.</h2>
+<% end %>

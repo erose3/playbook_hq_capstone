@@ -2,7 +2,14 @@ class TasksController < ApplicationController
   def index
     matching_tasks = Task.all
 
-    @list_of_tasks = matching_tasks.order({ :created_at => :desc })
+    if current_user != nil
+      @list_of_tasks = matching_tasks.order({ :created_at => :desc })
+      @user_tasks = @list_of_tasks.where({ :created_by => current_user.id })
+    else
+      @list_of_tasks = matching_tasks.order({ :created_at => :desc })
+    end
+
+    
 
     render({ :template => "tasks/index" })
   end
