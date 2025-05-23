@@ -3,7 +3,9 @@
 
     <div>
       <div>
-        <a href="/tasks">
+        <% matching_contracts = Contract.where ({ id: @the_task.contract_id }) %>
+        <% the_contract = matching_contracts.at(0) %>
+        <a href="/contracts/<%= the_contract.id %>">
           Go back
         </a>
       </div>
@@ -149,11 +151,7 @@
       </div>
 
       <div>
-        <label for="assigned_to_box">
-          Assigned to
-        </label>
-
-        <input type="text" id="assigned_to_box" name="query_assigned_to" value="<%= @the_task.assigned_to %>">
+        <input type="hidden" id="assigned_to_box" name="query_assigned_to" value="<%= @the_task.assigned_to %>">
       </div>
 <br>
       <button>

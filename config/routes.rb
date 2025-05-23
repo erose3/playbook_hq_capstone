@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   post("/insert_task", { :controller => "tasks", :action => "create" })
           
   # READ
-  get("/tasks", { :controller => "tasks", :action => "index" })
+  # get("/tasks", { :controller => "tasks", :action => "index" })
   
   get("/tasks/:path_id", { :controller => "tasks", :action => "show" })
   
