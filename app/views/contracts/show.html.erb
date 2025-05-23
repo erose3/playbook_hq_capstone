@@ -253,7 +253,11 @@
      <tr>
        <td><%= a_task.task_name %></td>
        <td><%= a_task.description %></td>
-       <td><%= a_task.assigned_to %></td>
+       <td>
+        <% matching_users = User.where ({ id: a_task.assigned_to }) %>
+        <% the_user = matching_users.at(0) %>
+        <%= the_user.first_name %> <%= the_user.last_name %>
+       </td>
        <td><%= a_task.deadline.strftime("%b %e, %Y") %></td>
        <td>
          <form action="/toggle_task_status/<%= a_task.id %>" method="post">
@@ -292,7 +296,11 @@
      <tr>
        <td><%= a_task.task_name %></td>
        <td><%= a_task.description %></td>
-       <td><%= a_task.assigned_to %></td>
+       <td>
+        <% matching_users = User.where ({ id: a_task.assigned_to }) %>
+        <% the_user = matching_users.at(0) %>
+        <%= the_user.first_name %> <%= the_user.last_name %>
+       </td>
        <td><%= a_task.deadline.strftime("%b %e, %Y") %></td>
        <td>
          <form action="/toggle_task_status/<%= a_task.id %>" method="post">

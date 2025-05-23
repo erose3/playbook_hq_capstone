@@ -18,27 +18,27 @@ task({ sample_data: :environment }) do
 
   puts "Loading Users..."
   CSV.foreach(Rails.root.join('db', 'sample_data', 'Sample Data Upload - Users.csv'), headers: true) do |row|
-    User.create!(
-      id: row['id'],
-      email: row['email'],
-      encrypted_password: row['encrypted_password'],
-      first_name: row['first_name'],
-      last_name: row['last_name'],
-      account_type: row['account_type'],
-      organization: row['organization'],
-      created_at: row['created_at'],
-      updated_at: row['updated_at'],
-      username: row['username']
-    )
-  end
+  User.create!(
+    id: row['id'],
+    email: row['email'],
+    password: 'password', # use plaintext password
+    first_name: row['first_name'],
+    last_name: row['last_name'],
+    account_type: row['account_type'],
+    organization: row['organization'],
+    created_at: row['created_at'],
+    updated_at: row['updated_at'],
+    username: row['username']
+  )
+end
 
   puts "Loading Contracts..."
   CSV.foreach(Rails.root.join('db', 'sample_data', 'Sample Data Upload - Contracts.csv'), headers: true) do |row|
     Contract.create!(
       id: row['id'],
       contract_name: row['contract_name'],
-      monetary_comp: row['monetary_comp'],
-      other_comp: row['other_comp'],
+      monetary_compensation: row['monetary_comp'],
+      other_compensation: row['other_comp'],
       created_by: row['created_by'],
       token: row['token'],
       tasks_count: row['tasks_count'],
