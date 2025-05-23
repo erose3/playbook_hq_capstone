@@ -134,8 +134,6 @@
           Updated at
         </th>
 
-        <th>
-        </th>
       </tr>
 
       <% @user_tasks.each do |a_task| %>
@@ -187,11 +185,11 @@
           <%= time_ago_in_words(a_task.updated_at) %> ago
         </td>
 
-        <td>
-          <a href="/tasks/<%= a_task.id %>">
+        <!--<td>
+          <a href="/tasks/<%#= a_task.id %>">
             Show details
           </a>
-        </td>
+        </td>-->
       </tr>
       <% end %>
     </table>

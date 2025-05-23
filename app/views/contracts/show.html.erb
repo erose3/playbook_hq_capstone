@@ -246,6 +246,7 @@
      <th>Assigned To</th>
      <th>Deadline</th>
      <th>Status</th>
+     <th>Action</th>
    </tr>
 
    <% @pending_tasks.each do |a_task| %>
@@ -265,8 +266,14 @@
            >
          </form>
        </td>
-     </tr>
+       <% if current_user.id = a_task.created_by %>
+          <td><a href="/tasks/<%= a_task.id %>">Edit Task</a></td>
+       <% else %>
+          You are not able to edit this task.
+       <% end %>
+       </td>
    <% end %>
+   </tr>
  </table>
 
 <h2>Completed Tasks</h2>
@@ -278,6 +285,7 @@
      <th>Assigned To</th>
      <th>Deadline</th>
      <th>Status</th>
+     <th>Action</th>
    </tr>
 
    <% @completed_tasks.each do |a_task| %>
@@ -297,6 +305,14 @@
            >
          </form>
        </td>
-     </tr>
+  
+     </td>
+       <% if current_user.id = a_task.created_by %>
+          <td><a href="/tasks/<%= a_task.id %>">Edit Task</a></td>
+       <% else %>
+          You are not able to edit this task.
+       <% end %>
+       </td>
+      </tr>
    <% end %>
  </table>
