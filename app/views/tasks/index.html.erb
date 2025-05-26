@@ -9,8 +9,8 @@
 <hr>
 
 <% if current_user != nil %>
-<div>
-  <div>
+<!--<div>
+  <div>-->
     <!--<h2>
       Add a new task
     </h2>
@@ -115,7 +115,7 @@
         </th>
 
         <th>
-          Completion status
+          Completed?
         </th>
 
         <th>
@@ -163,26 +163,36 @@
         </td>
 
         <td>
-          <%= a_task.deadline %>
+          <%= a_task.deadline.strftime("%b %e, %Y") %>
         </td>
 
         <td>
-          <%= a_task.completion_status %>
-        </td>
+         <form action="/toggle_task_status/<%= a_task.id %>" method="post">
+           <input
+             type="checkbox"
+             name="completion_status"
+             value="true"
+             <% if a_task.completion_status %>checked<% end %>
+             onchange="this.form.submit();"
+           >
+         </form>
+       </td>
 
         <td>
           <%= a_task.completed_on %>
         </td>
 
         <td>
-          <%= a_task.assigned_to %>
+          <% matching_users = User.where ({ id: a_task.assigned_to }) %>
+          <% the_user = matching_users.at(0) %>
+          <%= the_user.first_name %> <%= the_user.last_name %>
         </td>
 
         <td>
-          <%= time_ago_in_words(a_task.created_at) %> ago
+          <%= a_task.created_at.strftime("%b %e, %Y") %>
         </td>
         <td>
-          <%= time_ago_in_words(a_task.updated_at) %> ago
+          <%= a_task.updated_at.strftime("%b %e, %Y") %>
         </td>
 
         <!--<td>
