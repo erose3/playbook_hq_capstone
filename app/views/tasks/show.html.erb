@@ -151,18 +151,25 @@
       </div>
 
       <div>
-      <label for= "assigned_to_box"> Assigned To </label>
-
+      <label for="assigned_to_box">Assigned To</label>
       <select
-       id="assigned_to_box"
-       name="query_assigned_to">
-      <option value="<%= @brand_user.id %>">
-         <%= "#{@brand_user.first_name} #{@brand_user.last_name} (Brand)" %>
-      </option>
-      <option value="<%= @athlete_user.id %>">
-         <%= "#{@athlete_user.first_name} #{@athlete_user.last_name} (Athlete)" %>
-      </option>
-     </select>
+        id="assigned_to_box"
+        name="query_assigned_to"
+      >
+        <option
+          value="<%= @brand_user.id %>"
+          <%= "selected" if @the_task.assigned_to == @brand_user.id %>
+        >
+          <%= "#{@brand_user.first_name} #{@brand_user.last_name} (Brand)" %>
+        </option>
+
+        <option
+          value="<%= @athlete_user.id %>"
+          <%= "selected" if @the_task.assigned_to == @athlete_user.id %>
+        >
+          <%= "#{@athlete_user.first_name} #{@athlete_user.last_name} (Athlete)" %>
+        </option>
+      </select>
     </div>
 
 <br>
