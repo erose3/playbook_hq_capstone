@@ -2,12 +2,10 @@ class TasksController < ApplicationController
   def index
     
     if current_user != nil
-      @user_tasks = Task.where({ :assigned_to => current_user.id })
+      @user_tasks = Task.where({ :assigned_to => current_user.id }).order ({ :deadline => :asc })
     else
       @user_tasks = []
     end
-
-    
 
     render({ :template => "tasks/index" })
   end

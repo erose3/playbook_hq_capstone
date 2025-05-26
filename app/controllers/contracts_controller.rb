@@ -34,10 +34,14 @@ class ContractsController < ApplicationController
     # load the Brand user
     @brand_user = User.where({ :id => @the_contract.created_by }).at(0)
 
+     
     # load the first party (Athlete) on this contract
     matching_parties = Party.where({ :contract_id => @the_contract.id })
     the_party = matching_parties.at(0)
-    @athlete_user = User.where({ :id => the_party.party_id }).at(0)
+    if the_party == nil
+    else
+      @athlete_user = User.where({ :id => the_party.party_id }).at(0)
+    end
 
     render({ :template => "contracts/show" })
   end

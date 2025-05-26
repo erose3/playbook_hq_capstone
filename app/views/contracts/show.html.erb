@@ -105,12 +105,12 @@
   </div>
 </div>
 
-<% matching_parties = Party.where ({ contract_id: @the_contract.id }) %>
-<% the_party = matching_parties.at(0) %>
-<% matching_athletes = User.where ({ id: the_party.party_id }) %>
-<% the_athlete = matching_athletes.at(0) %>
+<%# matching_parties = Party.where ({ contract_id: @the_contract.id }) %>
+<%# the_party = matching_parties.at(0) %>
+<%# matching_athletes = User.where ({ id: the_party.party_id }) %>
+<%# the_athlete = matching_athletes.at(0) %>
 
-<% if matching_athletes = nil %>
+<% if @athlete_user == nil %>
 <h2>Invite your collaborator</h2>
  <p>
    Share this link:
@@ -120,7 +120,7 @@
  </p>
  <% else %>
   <h2>
-    Athlete: <%= the_athlete.first_name %> <%= the_athlete.last_name %> | <%= the_athlete.organization %>
+    Athlete: <%= @athlete_user.first_name %> <%= @athlete_user.last_name %> | <%= @athlete_user.organization %>
   </h2>
  <% end %>
 
@@ -242,6 +242,8 @@
         <input type="hidden" id="completed_on_box" name="query_completed_on">
       </div>
 
+    <% if @athlete_user == nil %>
+    <% else %>
     <div>
       <label for= "assigned_to_box"> Assigned To </label>
 
@@ -255,6 +257,7 @@
          <%= "#{@athlete_user.first_name} #{@athlete_user.last_name} (Athlete)" %>
       </option>
      </select>
+     <% end %>
     </div>
 
       <button>
