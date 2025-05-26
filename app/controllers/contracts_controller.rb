@@ -35,12 +35,15 @@ class ContractsController < ApplicationController
     the_contract.monetary_compensation = params.fetch("query_monetary_compensation")
     the_contract.other_compensation = params.fetch("query_other_compensation")
     the_contract.created_by = current_user.id
-    the_contract.token = params.fetch("query_token")
+    
+   # generate hex string
+    the_contract.token = SecureRandom.hex(16) 
+   
     the_contract.status = "Pending"
 
     if the_contract.valid?
       the_contract.save
-      redirect_to("/contracts", { :notice => "Contract created successfully." })
+      redirect_to("/contracts/#{the_contract.id}", { :notice => "Contract created successfully." })
     else
       redirect_to("/contracts", { :alert => the_contract.errors.full_messages.to_sentence })
     end
@@ -73,6 +76,36 @@ class ContractsController < ApplicationController
 
     redirect_to("/contracts/#{ the_contract.id }")
   end
+
+  # JOINING CONTRACT THROUGH TOKEN LINK
+
+  def join_contract
+     the_token = params.fetch("the_token")
+     matching_contracts = Contract.where({ :token => the_token })
+     the_contract = matching_contracts.at(0)
+
+     # if not logged in, remember the token and force a login/signup
+     if current_user.nil?
+       session.store("invite_token", the_token)
+       redirect_to("/login", { :alert => "Please log in or sign up to join the contract." })
+       return
+     end
+
+     # if already a party, do nothing; otherwise create the link
+     matching_parties = Party.where({
+       :contract_id => the_contract.id,
+       :party_id => current_user.id
+     })
+
+     if matching_parties.count == 0
+       new_party = Party.new
+       new_party.contract_id = the_contract.id
+       new_party.party_id = current_user.id
+       new_party.save
+     end
+
+     redirect_to("/contracts/#{the_contract.id}", { :notice => "You’ve joined the contract!" })
+   end
 
   def destroy
     the_id = params.fetch("path_id")

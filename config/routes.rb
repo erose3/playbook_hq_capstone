@@ -56,6 +56,10 @@ Rails.application.routes.draw do
 
   get("/edit_contract/:path_id", { :controller => "contracts", :action => "edit_contract_form" })
   
+  # JOIN CONTRACT
+
+  get("/join/:the_token", { :controller => "contracts", :action => "join_contract" })
+  
   # UPDATE
   
   post("/modify_contract/:path_id", { :controller => "contracts", :action => "update" })
