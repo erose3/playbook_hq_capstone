@@ -15,6 +15,7 @@ class ContractsController < ApplicationController
        end
      end
 
+
      render({ :template => "contracts/index" })
    end
 
