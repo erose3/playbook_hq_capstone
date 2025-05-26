@@ -101,11 +101,16 @@
       <dt>
         Updated: <%= @the_contract.updated_at.strftime("%b %e, %Y") %>
       </dt>
-      
     </dl>
   </div>
 </div>
 
+<% matching_parties = Party.where ({ contract_id: @the_contract.id }) %>
+<% the_party = matching_parties.at(0) %>
+<% matching_athletes = User.where ({ id: the_party.party_id }) %>
+<% the_athlete = matching_athletes.at(0) %>
+
+<% if matching_athletes = nil %>
 <h2>Invite your collaborator</h2>
  <p>
    Share this link:
@@ -113,6 +118,11 @@
      <%= "#{request.base_url}/join/#{@the_contract.token}" %>
    </a>
  </p>
+ <% else %>
+  <h2>
+    Athlete: <%= the_athlete.first_name %> <%= the_athlete.last_name %> | <%= the_athlete.organization %>
+  </h2>
+ <% end %>
 
 <hr>
 
@@ -207,7 +217,7 @@
           Description
         </label>
 
-        <textarea id="description_box" name="query_description" rows="3"></textarea>
+        <textarea id="description_box" name="query_description" rows="2"></textarea>
       </div>
 
       <div>
@@ -230,13 +240,20 @@
         <input type="hidden" id="completed_on_box" name="query_completed_on">
       </div>
 
-      <div>
-        <label for="assigned_to_box">
-          Assigned to
-        </label>
+    <div>
+      <label for= "assigned_to_box"> Assigned To </label>
 
-        <input type="text" id="assigned_to_box" name="query_assigned_to">
-      </div>
+      <select
+       id="assigned_to_box"
+       name="query_assigned_to">
+      <option value="<%= @brand_user.id %>">
+         <%= "#{@brand_user.first_name} #{@brand_user.last_name} (Brand)" %>
+      </option>
+      <option value="<%= @athlete_user.id %>">
+         <%= "#{@athlete_user.first_name} #{@athlete_user.last_name} (Athlete)" %>
+      </option>
+     </select>
+    </div>
 
       <button>
         Create task

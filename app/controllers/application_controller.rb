@@ -27,4 +27,14 @@ class ApplicationController < ActionController::Base
        ]
      )
    end
+
+  #  def after_sign_in_path_for(resource)
+  #    if session.fetch("invite_token", nil)
+  #      token = session.fetch("invite_token")
+  #      session.store("invite_token", nil)
+  #      "/join/#{token}"
+  #    else
+  #      super
+  #    end
+  #  end
  end

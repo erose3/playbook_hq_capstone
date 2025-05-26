@@ -21,6 +21,16 @@ class TasksController < ApplicationController
 
     @the_task = matching_tasks.at(0)
 
+    # load the Brand user
+    @brand_user = User.where({ :id => @the_task.created_by }).at(0)
+
+    # load the first party (Athlete) on this contract
+    matching_contracts = Contract.where({ :id => @the_task.contract_id })
+    the_contract = matching_contracts.at(0)
+    matching_parties = Party.where({ :contract_id => the_contract.id })
+    the_party = matching_parties.at(0)
+    @athlete_user = User.where({ :id => the_party.party_id }).at(0)
+
     render({ :template => "tasks/show" })
   end
 

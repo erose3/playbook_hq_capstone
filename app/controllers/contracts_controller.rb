@@ -25,6 +25,14 @@ class ContractsController < ApplicationController
     @completed_tasks = @matching_tasks.where({ :completion_status => "true"}).order({ :deadline => :asc })
     @pending_tasks = @matching_tasks.where({ :completion_status => "false"}).order({ :deadline => :asc })
 
+    # load the Brand user
+    @brand_user = User.where({ :id => @the_contract.created_by }).at(0)
+
+    # load the first party (Athlete) on this contract
+    matching_parties = Party.where({ :contract_id => @the_contract.id })
+    the_party = matching_parties.at(0)
+    @athlete_user = User.where({ :id => the_party.party_id }).at(0)
+
     render({ :template => "contracts/show" })
   end
 
@@ -79,33 +87,35 @@ class ContractsController < ApplicationController
 
   # JOINING CONTRACT THROUGH TOKEN LINK
 
-  def join_contract
+ def join_contract
      the_token = params.fetch("the_token")
      matching_contracts = Contract.where({ :token => the_token })
      the_contract = matching_contracts.at(0)
 
-     # if not logged in, remember the token and force a login/signup
      if current_user.nil?
+       # stash the invite and send to Devise login
        session.store("invite_token", the_token)
-       redirect_to("/login", { :alert => "Please log in or sign up to join the contract." })
+       redirect_to("/users/sign_in",
+                   { :alert => "Please log in or sign up to join the contract." })
        return
      end
 
-     # if already a party, do nothing; otherwise create the link
-     matching_parties = Party.where({
+     # if already linked, skip; otherwise create the Party join
+     existing = Party.where({
        :contract_id => the_contract.id,
-       :party_id => current_user.id
-     })
+       :party_id    => current_user.id
+     }).count
 
-     if matching_parties.count == 0
+     if existing == 0
        new_party = Party.new
        new_party.contract_id = the_contract.id
-       new_party.party_id = current_user.id
+       new_party.party_id    = current_user.id
        new_party.save
      end
 
      redirect_to("/contracts/#{the_contract.id}", { :notice => "You’ve joined the contract!" })
    end
+ 
 
   def destroy
     the_id = params.fetch("path_id")
