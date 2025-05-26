@@ -193,6 +193,8 @@
   </div>
 </div>-->
 
+<%  if current_user.account_type == "Brand" %>
+
 <div>
   <div>
     <h2>
@@ -261,6 +263,8 @@
     </form>
   </div>
 </div>
+<% else %>
+<% end %>
 
 <h2>Pending Tasks</h2>
 
@@ -271,7 +275,10 @@
      <th>Assigned To</th>
      <th>Deadline</th>
      <th>Status</th>
+    <% if current_user.account_type == "Brand"%>
      <th>Action</th>
+    <% else %>
+    <% end %>
    </tr>
 
    <% @pending_tasks.each do |a_task| %>
@@ -295,10 +302,9 @@
            >
          </form>
        </td>
-       <% if current_user.id = a_task.created_by %>
+       <% if current_user.account_type == "Brand"%>
           <td><a href="/tasks/<%= a_task.id %>">Edit Task</a></td>
        <% else %>
-          You are not able to edit this task.
        <% end %>
        </td>
    <% end %>
@@ -314,7 +320,10 @@
      <th>Assigned To</th>
      <th>Deadline</th>
      <th>Status</th>
+     <% if current_user.account_type == "Brand"%>
      <th>Action</th>
+     <% else %>
+     <% end %>
    </tr>
 
    <% @completed_tasks.each do |a_task| %>
@@ -340,10 +349,9 @@
        </td>
   
      </td>
-       <% if current_user.id = a_task.created_by %>
+       <% if current_user.account_type == "Brand"%>
           <td><a href="/tasks/<%= a_task.id %>">Edit Task</a></td>
        <% else %>
-          You are not able to edit this task.
        <% end %>
        </td>
       </tr>

@@ -1,17 +1,23 @@
 class ContractsController < ApplicationController
   def index
-    matching_contracts = Contract.all
+     if current_user.nil?
+       @user_contracts = []
+     elsif current_user.account_type == "Brand"
+       # brands see contracts they created
+       @user_contracts = Contract.where({ :created_by => current_user.id }).order({ :created_at => :desc })
+     else
+       # athletes see only contracts they joined via Party
+       @user_contracts = []
+       Party.where({ :party_id => current_user.id }).each do |party|
+         matching_contracts = Contract.where({ :id => party.contract_id })
+         found_contract     = matching_contracts.at(0)
+         @user_contracts.push(found_contract) if found_contract
+       end
+     end
 
-    if current_user != nil
-      @list_of_contracts = matching_contracts.order({ :created_at => :desc })
-      @user_contracts = @list_of_contracts.where({ :created_by => current_user.id })
-    else
-      @list_of_contracts = matching_contracts.order({ :created_at => :desc })
-    end
+     render({ :template => "contracts/index" })
+   end
 
-
-    render({ :template => "contracts/index" })
-  end
 
   def show
     the_id = params.fetch("path_id")
