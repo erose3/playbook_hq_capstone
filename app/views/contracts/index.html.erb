@@ -1,17 +1,22 @@
 <div>
-  <div>
-    <h1>
-      Your Contracts
-    </h1>
-  </div>
+  <div class="row mb-3">
+    <div class="col-md-12 d-flex align-items-center">
+      <h1>
+        Your Contracts
+      </h1>
 
-<% if current_user != nil && current_user.account_type == "Brand" %>
-<button><a href="/new_contract">Add New Contract</a></button>
-<br>
-<% elsif current_user != nil && current_user.account_type == "Athlete" %>
-<% else %>
-<h2>Please <a href="/users/sign_in">log in</a> or <a href="/users/sign_up">sign up</a> to view and add contracts.</h2>
-<% end %>
+    <% if current_user != nil && current_user.account_type == "Brand" %>
+    <div class="ms-auto">
+      <a href="/new_contract" type="button" class="btn btn-outline-success">
+        Add New Contract
+      </a>
+    <% elsif current_user != nil && current_user.account_type == "Athlete" %>
+    <% else %>
+    <h2>Please <a href="/users/sign_in">log in</a> or <a href="/users/sign_up">sign up</a> to view and add contracts.</h2>
+    <% end %>
+    </div>
+  </div>
+</div>
 
 <br>
 
