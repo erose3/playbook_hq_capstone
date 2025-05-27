@@ -16,7 +16,7 @@
         </a>
       </div>
     </div>
-
+<br>
     
       <h2>
         Contract: 
@@ -95,13 +95,13 @@
 
 <hr>-->
 
-
 <div>
   <div>
     <h3>
       Edit task
     </h3>
 
+<br>
     <form action="/modify_task/<%= @the_task.id %>"  method="post" >
       <div>
         <input type="hidden" id="contract_id_box" name="query_contract_id" value="<%= @the_task.contract_id %>">
@@ -112,7 +112,7 @@
           Task name
         </label>
 
-        <input type="text" id="task_name_box" name="query_task_name" value="<%= @the_task.task_name %>">
+        <input class="col-sm-3" type="text" id="task_name_box" name="query_task_name" value="<%= @the_task.task_name %>">
       </div>
 
       <div>
@@ -120,7 +120,7 @@
           Description
         </label>
 
-        <textarea id="description_box" name="query_description"><%= @the_task.description %></textarea>
+        <textarea class="col-sm-5" id="description_box" name="query_description"><%= @the_task.description %></textarea>
       </div>
 
       <div>

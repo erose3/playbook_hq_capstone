@@ -4,7 +4,8 @@
       <h1>
         Your Contracts
       </h1>
-
+    </div>
+ <hr>
     <% if current_user != nil && current_user.account_type == "Brand" %>
     <div class="ms-auto">
       <a href="/new_contract" type="button" class="btn btn-outline-success">
@@ -12,7 +13,7 @@
       </a>
     <% elsif current_user != nil && current_user.account_type == "Athlete" %>
     <% else %>
-    <h2>Please <a href="/users/sign_in">log in</a> or <a href="/users/sign_up">sign up</a> to view and add contracts.</h2>
+    <h3>Please <a href="/users/sign_in">log in</a> or <a href="/users/sign_up">sign up</a> to view and add contracts.</h3>
     <% end %>
     </div>
   </div>
@@ -24,7 +25,8 @@
 
 <div>
   <div>
-    <table border="1">
+    <table class="table" >
+    <thead>
       <tr>
        <!-- <th>
           ID
@@ -73,11 +75,12 @@
         <th>
           Updated at
         </th>
-
+      </thead>
       </tr>
 
         
       <% @user_contracts.each do |a_contract| %>
+      <tbody>
       <tr>
         <!--<td>-->
           <%#= a_contract.id %>
@@ -139,6 +142,7 @@
           </a>
         </td>-->
       </tr>
+      </tbody>
       <% end %>
     </table>
   </div>

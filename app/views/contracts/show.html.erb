@@ -3,7 +3,6 @@
     <h1>
     Contract: <%= @the_contract.contract_name%>
     </h1>
-    <h3>Details and Tasks</h3>
 
     <div>
       <div>
@@ -52,7 +51,7 @@
     </select>
   </form>
 </div>
-
+<br>
 
     <dl>
       <!--<dt>
@@ -62,7 +61,7 @@
         <%#= @the_contract.contract_name %>-->
 <!--      </dd>
 -->
-      <dt>
+      <dt class="col-sm-8" >
         Contract Description: <%= @the_contract.description %>
       </dt>
 
@@ -204,11 +203,11 @@
     </h2>
 
     <form action="/insert_task" method="post">
-      <div>
+      <div class="mb-2" >
         <input type="hidden" id="contract_id_box" name="query_contract_id" value="<%= @the_contract.id %>">
       </div>
 
-      <div>
+      <div class="mb-2" >
         <label for="task_name_box">
           Task name
         </label>
@@ -216,19 +215,19 @@
         <input type="text" id="task_name_box" name="query_task_name">
       </div>
 
-      <div>
+      <div class="mb-2">
         <label for="description_box">
           Description
         </label>
 
-        <textarea id="description_box" name="query_description" rows="2"></textarea>
+        <textarea class="col-sm-5" id="description_box" name="query_description" rows="2"></textarea>
       </div>
 
       <div>
         <input type="hidden" id="created_by_box" name="query_created_by">
       </div>
 
-      <div>
+      <div class="mb-2">
         <label for="deadline_box">
           Deadline
         </label>
@@ -246,7 +245,7 @@
 
     <% if @athlete_user == nil %>
     <% else %>
-    <div>
+    <div class="mb-2">
       <label for= "assigned_to_box"> Assigned To </label>
 
       <select
@@ -262,7 +261,7 @@
      <% end %>
     </div>
 
-      <button>
+      <button class="mb-3">
         Create task
       </button>
     </form>
@@ -271,9 +270,10 @@
 <% else %>
 <% end %>
 
+<br>
 <h2>Pending Tasks</h2>
 
-<table border="1">
+<table class = "table" >
    <tr>
      <th>Task</th>
      <th>Description</th>
@@ -315,10 +315,10 @@
    <% end %>
    </tr>
  </table>
-
+<br>
 <h2>Completed Tasks</h2>
 
-<table border="1">
+<table class = "table" >
    <tr>
      <th>Task</th>
      <th>Description</th>
